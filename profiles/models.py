@@ -10,12 +10,11 @@ class Profile(models.Model):
     name = models.CharField(max_length=255, blank=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to="images/",
-        default="https://res.cloudinary.com/dhhna0y51/image/upload/v1746523943/default_profile_xy7dhb.jpg",
+        upload_to='images/', default='../default_profile_qdjgyp'
     )
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"{self.owner}'s profile"
