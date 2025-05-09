@@ -32,3 +32,4 @@ class ProfileSerializer(serializers.ModelSerializer):
             'content', 'image', 'is_owner', 'following_id',
             'posts_count', 'followers_count', 'following_count',
         ]
+        

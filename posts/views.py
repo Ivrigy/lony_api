@@ -27,7 +27,6 @@ class PostList(generics.ListCreateAPIView):
         'likes__owner__profile',
         'owner__profile',
     ]
-
     search_fields = [
         'owner__username',
         'title',
@@ -52,3 +51,4 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
+    
