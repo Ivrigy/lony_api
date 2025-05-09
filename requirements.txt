@@ -8,9 +8,11 @@ django-allauth==65.8.0
 django-cloudinary-storage==0.3.0
 django-filter==25.1
 djangorestframework==3.16.0
+djangorestframework_simplejwt==5.5.0
 idna==3.10
 legacy-cgi==2.6.3
 pillow==11.2.1
+PyJWT==2.9.0
 pytz==2025.2
 requests==2.32.3
 six==1.17.0
