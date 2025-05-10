@@ -8,7 +8,7 @@ os.environ.setdefault('DEV', '1')
 # Cloudinary configuration (use your real credentials or override via env)
 os.environ.setdefault(
     'CLOUDINARY_URL',
-    'cloudinary://<your_api_key>:<your_api_secret>@dhhna0y51'
+    'cloudinary://638817314419361:Js69z9_ga6_OC2nTy1j6GKN3kPM@dhhna0y51'
 )
 
 # SECRET_KEY: generate a secure random key only if none is set in the environment
