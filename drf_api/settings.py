@@ -71,7 +71,7 @@ ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     'localhost',
     '127.0.0.1',
-    'definitive..herokuapp.com'
+    'definitive-6f131423af8d.herokuapp.com'
 ]
 
 if 'CLIENT_ORIGIN' in os.environ:
