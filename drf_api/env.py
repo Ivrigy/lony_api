@@ -17,5 +17,5 @@ os.environ.setdefault('SECRET_KEY', get_random_secret_key())
 # DATABASE_URL for production: only if not already provided
 os.environ.setdefault(
     'DATABASE_URL',
-    'postgresql://neondb_owner:npg_KlRpLg4eP1Ys@ep-purple-wind-a2qd67lw.eu-central-1.aws.neon.tech/rinse_stamp_water_942885'
+    'postgresql://neondb_owner:npg_KlRpLg4eP1Ys@ep-purple-wind-a2qd67lw.eu-central-1.aws.neon.tech/tulip_stall_stain_345097'
 )
