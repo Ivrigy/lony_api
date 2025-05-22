@@ -13,9 +13,8 @@ env = environ.Env(
 )
 
 env_file = BASE_DIR / ".env"
-if not env_file.exists():
-    raise ImproperlyConfigured(f"Missing .env file at {env_file}")
-environ.Env.read_env(env_file)
+if env_file.exists():
+    environ.Env.read_env(env_file)
 
 CLOUDINARY_STORAGE = {
     "CLOUDINARY_URL": env("CLOUDINARY_URL"),
