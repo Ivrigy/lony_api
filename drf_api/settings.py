@@ -14,7 +14,7 @@ env = environ.Env(
 
 env_file = BASE_DIR / ".env"
 if env_file.exists():
-    environ.Env.read_env(env_file)
+    env.read_env(env_file)
 
 CLOUDINARY_STORAGE = {
     "CLOUDINARY_URL": env("CLOUDINARY_URL"),
@@ -51,6 +51,7 @@ if env("CLIENT_ORIGIN_DEV", default=None):
         CORS_ALLOWED_ORIGIN_REGEXES = [
             rf"{prefix}-(eu|us)\d+\w\.gitpod\.io$",
         ]
+
 
 # Application definition
 
