@@ -37,6 +37,7 @@ CORS_ALLOWED_ORIGINS = [
     origin for origin in (
         env("CLIENT_ORIGIN",     default=None),
         env("CLIENT_ORIGIN_DEV", default=None),
+        env("CLIENT_ORIGIN_LOCAL", default=None),
     ) if origin
 ]
 if env("CLIENT_ORIGIN_DEV", default=None):
@@ -80,10 +81,10 @@ INSTALLED_APPS = [
 ]
 SITE_ID = 1
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "allauth.account.middleware.AccountMiddleware",  # ← add this line
