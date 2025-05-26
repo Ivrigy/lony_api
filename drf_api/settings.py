@@ -29,30 +29,36 @@ ALLOWED_HOSTS = [
     env("ALLOWED_HOST", default=None),
     "127.0.0.1",
     "localhost",
-    "lonyapp-2af3ad54852f.herokuapp.com",
     "lony-api-3e20bf0b1e37.herokuapp.com",
+    "giraffe-smashing-optionally.ngrok-free.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    origin for origin in (
-        env("CLIENT_ORIGIN",     default=None),
-        env("CLIENT_ORIGIN_DEV", default=None),
-        env("CLIENT_ORIGIN_LOCAL", default=None),
-    ) if origin
+    "http://localhost:3000",
+    "https://giraffe-smashing-optionally.ngrok-free.app",
+    "https://lonyapp-2af3ad54852f.herokuapp.com",   
 ]
-if env("CLIENT_ORIGIN_DEV", default=None):
-    prefix_match = re.match(
-        r"^(.+?)-",
-        env("CLIENT_ORIGIN_DEV"),
-        re.IGNORECASE,
-    )
-    if prefix_match:
-        prefix = prefix_match.group(1)
-        CORS_ALLOWED_ORIGIN_REGEXES = [
-            rf"{prefix}-(eu|us)\d+\w\.gitpod\.io$",
-        ]
+
+# CORS_ALLOWED_ORIGINS = [
+#     origin for origin in (
+#         env("CLIENT_ORIGIN",     default=None),
+#         env("CLIENT_ORIGIN_DEV", default=None),
+#         env("CLIENT_ORIGIN_LOCAL", default=None),
+#     ) if origin
+# ]
+# if env("CLIENT_ORIGIN_DEV", default=None):
+#     prefix_match = re.match(
+#         r"^(.+?)-",
+#         env("CLIENT_ORIGIN_DEV"),
+#         re.IGNORECASE,
+#     )
+#     if prefix_match:
+#         prefix = prefix_match.group(1)
+#         CORS_ALLOWED_ORIGIN_REGEXES = [
+#             rf"{prefix}-(eu|us)\d+\w\.gitpod\.io$",
+#         ]
 
 
 # Application definition
