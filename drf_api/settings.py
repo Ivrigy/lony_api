@@ -27,7 +27,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
     env("ALLOWED_HOST", default=None),
-    "localhost",
+    "http://localhost:3000",
     "127.0.0.1",
     "https://lonyapp-2af3ad54852f.herokuapp.com/",
 ]
