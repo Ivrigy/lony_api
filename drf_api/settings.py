@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     "http://localhost:3000",
     "127.0.0.1",
     "https://lonyapp-2af3ad54852f.herokuapp.com/",
+    "https://lony-api-3e20bf0b1e37.herokuapp.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
