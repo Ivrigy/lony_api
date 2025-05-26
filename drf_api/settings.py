@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
     env("ALLOWED_HOST", default=None),
     "localhost",
     "127.0.0.1",
-    "lony-api-3e20bf0b1e37.herokuapp.com",
+    "https://lonyapp-2af3ad54852f.herokuapp.com/",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
