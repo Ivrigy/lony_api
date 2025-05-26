@@ -27,13 +27,14 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
     env("ALLOWED_HOST", default=None),
-    "http://localhost:3000",
     "127.0.0.1",
-    "https://lonyapp-2af3ad54852f.herokuapp.com/",
-    "https://lony-api-3e20bf0b1e37.herokuapp.com",
+    "localhost",
+    "lonyapp-2af3ad54852f.herokuapp.com",
+    "lony-api-3e20bf0b1e37.herokuapp.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
     origin for origin in (
         env("CLIENT_ORIGIN",     default=None),
@@ -84,6 +85,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware", 
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
