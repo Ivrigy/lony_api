@@ -1,10 +1,9 @@
 import os
-import re
 from pathlib import Path
 
 import environ
 import dj_database_url
-from django.core.exceptions import ImproperlyConfigured
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,7 +37,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://giraffe-smashing-optionally.ngrok-free.app",
-    "https://lonyapp-2af3ad54852f.herokuapp.com",   
+    "https://lonyapp-2af3ad54852f.herokuapp.com",
 ]
 
 # CORS_ALLOWED_ORIGINS = [
