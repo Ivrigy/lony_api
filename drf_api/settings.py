@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import environ
 import dj_database_url
@@ -13,14 +12,6 @@ env = environ.Env(
 env_file = BASE_DIR / ".env"
 if env_file.exists():
     env.read_env(env_file)
-
-CLOUDINARY_STORAGE = {
-    "CLOUDINARY_URL": env("CLOUDINARY_URL"),
-}
-MEDIA_URL = "/media/"
-DEFAULT_FILE_STORAGE = (
-    "cloudinary_storage.storage.MediaCloudinaryStorage"
-)
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
@@ -54,12 +45,11 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "rest_framework",
     "django_filters",
-    "rest_framework.authtoken",
     "dj_rest_auth",
+    "dj_rest_auth.registration",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "dj_rest_auth.registration",
     "profiles",
     "posts",
     "comments",
@@ -88,8 +78,7 @@ ROOT_URLCONF = "drf_api.urls"
 
 TEMPLATES = [
     {
-        "BACKEND":
-            "django.template.backends.django.DjangoTemplates",
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -108,27 +97,21 @@ WSGI_APPLICATION = "drf_api.wsgi.application"
 if DEBUG:
     DATABASES = {
         "default": {
-            "ENGINE":
-                "django.db.backends.sqlite3",
-            "NAME":
-                BASE_DIR / "db.sqlite3",
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 else:
     DATABASES = {
-        "default":
-            dj_database_url.config(
-                default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-                conn_max_age=600,
-                conn_health_checks=True,
-            ),
+        "default": dj_database_url.config(
+            default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+            conn_max_age=600,
+            conn_health_checks=True,
+        ),
     }
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication"
-        if DEV
-        else
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
     "DEFAULT_PAGINATION_CLASS":
@@ -139,29 +122,37 @@ REST_FRAMEWORK = {
         "%d %b %Y",
 }
 
+# Only JSON in production
 if not DEV:
     REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
         "rest_framework.renderers.JSONRenderer",
     ]
 
+# JWT in cookies
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = "my-app-auth"
 JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
 JWT_AUTH_SAMESITE = "None"
 
-if (
-    env("ACCESS_TOKEN_LIFETIME", default=None)
-    and env("REFRESH_TOKEN_LIFETIME", default=None)
+if env("ACCESS_TOKEN_LIFETIME", default=None) and env(
+    "REFRESH_TOKEN_LIFETIME", default=None
 ):
     SIMPLE_JWT = {
-        "ROTATE_REFRESH_TOKENS": True,
-        "BLACKLIST_AFTER_ROTATION": True,
+        "ROTATE_REFRESH_TOKENS":
+        True,
+        "BLACKLIST_AFTER_ROTATION":
+        True,
         "ACCESS_TOKEN_LIFETIME":
-            timedelta(seconds=env("ACCESS_TOKEN_LIFETIME")),
+        timedelta(
+            seconds=env("ACCESS_TOKEN_LIFETIME")
+        ),
         "REFRESH_TOKEN_LIFETIME":
-            timedelta(seconds=env("REFRESH_TOKEN_LIFETIME")),
+        timedelta(
+            seconds=env("REFRESH_TOKEN_LIFETIME")
+        ),
     }
+
 
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = "None"
@@ -169,9 +160,9 @@ CSRF_TRUSTED_ORIGINS = [
     "https://lonyapp-2af3ad54852f.herokuapp.com",
 ]
 
+# Serializer override to include profile on /user/
 REST_AUTH_SERIALIZERS = {
-    "USER_DETAILS_SERIALIZER":
-        "drf_api.serializers.CurrentUserSerializer",
+    "USER_DETAILS_SERIALIZER": "drf_api.serializers.CurrentUserSerializer",
 }
 
 LANGUAGE_CODE = "en-us"
@@ -182,6 +173,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
