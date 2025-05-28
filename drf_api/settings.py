@@ -25,12 +25,12 @@ ALLOWED_HOSTS = [
     "giraffe-smashing-optionally.ngrok-free.app",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://giraffe-smashing-optionally.ngrok-free.app",
     "https://lonyapp-2af3ad54852f.herokuapp.com",
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -40,26 +40,19 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-
     "corsheaders",
     "cloudinary",
     "cloudinary_storage",
-
     "rest_framework",
     "django_filters",
-
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-
     "dj_rest_auth",
     "dj_rest_auth.registration",
-
-
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "rest_framework.authtoken",
-
     "profiles",
     "posts",
     "comments",
@@ -107,12 +100,12 @@ if DEBUG:
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
-        }
+        },
     }
 else:
     DATABASES = {
         "default": dj_database_url.config(
-            default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+            default=str(BASE_DIR / "db.sqlite3"),
             conn_max_age=600,
             conn_health_checks=True,
         ),
@@ -122,8 +115,10 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
-    "DEFAULT_PAGINATION_CLASS":
-        "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": (
+        "rest_framework.pagination."
+        "PageNumberPagination"
+    ),
     "PAGE_SIZE": 10,
     "DATETIME_FORMAT": "%d %b %Y",
 }
@@ -136,9 +131,9 @@ if not DEV:
     ]
 
 REST_USE_JWT = True
-JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = "my-app-auth"
 JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
+JWT_AUTH_SECURE = True
 JWT_AUTH_SAMESITE = "None"
 
 if (
