@@ -40,23 +40,29 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+
     "corsheaders",
     "cloudinary",
     "cloudinary_storage",
+
     "rest_framework",
     "django_filters",
-    "dj_rest_auth",
-    "dj_rest_auth.registration",
+
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+
+    "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
+
     "profiles",
     "posts",
     "comments",
     "likes",
     "followers",
-    "rest_framework_simplejwt",
-    "rest_framework_simplejwt.token_blacklist",
 ]
 
 SITE_ID = 1
@@ -116,60 +122,43 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS":
         "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE":
-        10,
-    "DATETIME_FORMAT":
-        "%d %b %Y",
+    "PAGE_SIZE": 10,
+    "DATETIME_FORMAT": "%d %b %Y",
 }
 
-# Only JSON in production
+REST_AUTH_TOKEN_MODEL = None
+
 if not DEV:
     REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = [
         "rest_framework.renderers.JSONRenderer",
     ]
 
-# JWT in cookies
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = "my-app-auth"
 JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
 JWT_AUTH_SAMESITE = "None"
 
-if env("ACCESS_TOKEN_LIFETIME", default=None) and env(
-    "REFRESH_TOKEN_LIFETIME", default=None
+if (
+    env("ACCESS_TOKEN_LIFETIME", default=None)
+    and env("REFRESH_TOKEN_LIFETIME", default=None)
 ):
     SIMPLE_JWT = {
-        "ROTATE_REFRESH_TOKENS":
-        True,
-        "BLACKLIST_AFTER_ROTATION":
-        True,
-        "ACCESS_TOKEN_LIFETIME":
-        timedelta(
+        "ROTATE_REFRESH_TOKENS": True,
+        "BLACKLIST_AFTER_ROTATION": True,
+        "ACCESS_TOKEN_LIFETIME": timedelta(
             seconds=env("ACCESS_TOKEN_LIFETIME")
         ),
-        "REFRESH_TOKEN_LIFETIME":
-        timedelta(
+        "REFRESH_TOKEN_LIFETIME": timedelta(
             seconds=env("REFRESH_TOKEN_LIFETIME")
         ),
     }
-
 
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_TRUSTED_ORIGINS = [
     "https://lonyapp-2af3ad54852f.herokuapp.com",
 ]
-
-# Serializer override to include profile on /user/
-REST_AUTH_SERIALIZERS = {
-    "USER_DETAILS_SERIALIZER": "drf_api.serializers.CurrentUserSerializer",
-}
-
-LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
