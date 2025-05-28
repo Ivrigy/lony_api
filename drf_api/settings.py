@@ -163,6 +163,12 @@ if (
             timedelta(seconds=env("REFRESH_TOKEN_LIFETIME")),
     }
 
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_TRUSTED_ORIGINS = [
+    "https://lonyapp-2af3ad54852f.herokuapp.com",
+]
+
 REST_AUTH_SERIALIZERS = {
     "USER_DETAILS_SERIALIZER":
         "drf_api.serializers.CurrentUserSerializer",
