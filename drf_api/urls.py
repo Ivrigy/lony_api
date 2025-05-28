@@ -2,7 +2,11 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import root_route, logout_route
-from dj_rest_auth.jwt_auth import get_refresh_view, get_verify_view
+
+# dj-rest-auth’s cookie‐based refresh
+from dj_rest_auth.jwt_auth import get_refresh_view
+# SimpleJWT’s verify (dj-rest-auth doesn’t ship its own in v7.0)
+from rest_framework_simplejwt.views import TokenVerifyView
 
 urlpatterns = [
     path('', root_route),
@@ -21,7 +25,7 @@ urlpatterns = [
     ),
     path(
         'dj-rest-auth/token/verify/',
-        get_verify_view().as_view(),
+        TokenVerifyView.as_view(),
         name='token_verify'
     ),
 
