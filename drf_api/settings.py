@@ -9,8 +9,7 @@ env = environ.Env(
     DEBUG=(bool, False),
     DEV=(bool, False),
 )
-env_file = BASE_DIR / ".env"
-if env_file.exists():
+if (env_file := BASE_DIR / ".env").exists():
     env.read_env(env_file)
 
 SECRET_KEY = env("SECRET_KEY")
@@ -25,12 +24,12 @@ ALLOWED_HOSTS = [
     "giraffe-smashing-optionally.ngrok-free.app",
 ]
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://giraffe-smashing-optionally.ngrok-free.app",
     "https://lonyapp-2af3ad54852f.herokuapp.com",
 ]
-CORS_ALLOW_CREDENTIALS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "rest_framework",
     "django_filters",
+    "rest_framework.authtoken",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    "rest_framework.authtoken",
     "profiles",
     "posts",
     "comments",
