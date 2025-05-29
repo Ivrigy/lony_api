@@ -154,7 +154,10 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_TRUSTED_ORIGINS = [
     "https://lonyapp-2af3ad54852f.herokuapp.com",
+    "http://localhost:3000",
 ]
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "None"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
