@@ -112,7 +112,7 @@ else:
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PAGINATION_CLASS": (
         "rest_framework.pagination."
@@ -130,34 +130,36 @@ if not DEV:
     ]
 
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = "my-app-auth"
-JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
-JWT_AUTH_SECURE = True
-JWT_AUTH_SAMESITE = "None"
+# JWT_AUTH_COOKIE = "my-app-auth"
+# JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
+# JWT_AUTH_SECURE = True
+# JWT_AUTH_SAMESITE = "None"
 
-if (
-    env("ACCESS_TOKEN_LIFETIME", default=None)
-    and env("REFRESH_TOKEN_LIFETIME", default=None)
-):
-    SIMPLE_JWT = {
-        "ROTATE_REFRESH_TOKENS": True,
-        "BLACKLIST_AFTER_ROTATION": True,
-        "ACCESS_TOKEN_LIFETIME": timedelta(
-            seconds=env("ACCESS_TOKEN_LIFETIME")
-        ),
-        "REFRESH_TOKEN_LIFETIME": timedelta(
-            seconds=env("REFRESH_TOKEN_LIFETIME")
-        ),
-    }
+# if (
+#     env("ACCESS_TOKEN_LIFETIME", default=None)
+#     and env("REFRESH_TOKEN_LIFETIME", default=None)
+# ):
 
+SIMPLE_JWT = {
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        seconds=env.int("ACCESS_TOKEN_LIFETIME", default=300)
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        seconds=env.int("REFRESH_TOKEN_LIFETIME", default=86400)
+    ),
+}
+
+# in case of non-JWT endpoints
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_TRUSTED_ORIGINS = [
     "https://lonyapp-2af3ad54852f.herokuapp.com",
     "http://localhost:3000",
 ]
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_SAMESITE = "None"
+# SESSION_COOKIE_SECURE = True
+# SESSION_COOKIE_SAMESITE = "None"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
