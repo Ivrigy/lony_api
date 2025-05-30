@@ -140,8 +140,9 @@ if not DEV:
 
 REST_USE_JWT = True
 REST_AUTH_SERIALIZERS = {
-    "LOGIN_SERIALIZER": "dj_rest_auth.serializers.LoginSerializer",
+    'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
 }
+
 
 SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
