@@ -40,10 +40,6 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
 ]
 
-REST_AUTH_SERIALIZERS = {
-    "LOGIN_SERIALIZER": "dj_rest_auth.serializers.LoginSerializer",
-}
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -143,15 +139,9 @@ if not DEV:
     ]
 
 REST_USE_JWT = True
-# JWT_AUTH_COOKIE = "my-app-auth"
-# JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
-# JWT_AUTH_SECURE = True
-# JWT_AUTH_SAMESITE = "None"
-
-# if (
-#     env("ACCESS_TOKEN_LIFETIME", default=None)
-#     and env("REFRESH_TOKEN_LIFETIME", default=None)
-# ):
+REST_AUTH_SERIALIZERS = {
+    "LOGIN_SERIALIZER": "dj_rest_auth.serializers.LoginSerializer",
+}
 
 SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
@@ -163,6 +153,15 @@ SIMPLE_JWT = {
         seconds=env.int("REFRESH_TOKEN_LIFETIME", default=86400)
     ),
 }
+# JWT_AUTH_COOKIE = "my-app-auth"
+# JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
+# JWT_AUTH_SECURE = True
+# JWT_AUTH_SAMESITE = "None"
+
+# if (
+#     env("ACCESS_TOKEN_LIFETIME", default=None)
+#     and env("REFRESH_TOKEN_LIFETIME", default=None)
+# ):
 
 # in case of non-JWT endpoints
 CSRF_COOKIE_SECURE = True
