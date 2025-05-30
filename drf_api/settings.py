@@ -24,11 +24,20 @@ ALLOWED_HOSTS = [
     "giraffe-smashing-optionally.ngrok-free.app",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://giraffe-smashing-optionally.ngrok-free.app",
     "https://lonyapp-2af3ad54852f.herokuapp.com",
+]
+
+CORS_ALLOW_HEADERS = [
+    "authorization",
+    "content-type",
+    "accept",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
 ]
 
 INSTALLED_APPS = [
