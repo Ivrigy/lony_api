@@ -40,6 +40,10 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
 ]
 
+REST_AUTH_SERIALIZERS = {
+    "LOGIN_SERIALIZER": "dj_rest_auth.serializers.LoginSerializer",
+}
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
